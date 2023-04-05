@@ -4,13 +4,14 @@ import (
 	"belajar-gin-gorm/controllers"
 	"belajar-gin-gorm/database"
 	"fmt"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-const PORT = ":3000"
-
 func main() {
+	port := os.Getenv("PORT")
+
 	fmt.Println("Starting server.......")
 
 	db := database.Postgres()
@@ -31,5 +32,5 @@ func main() {
 		users.GET("/products", controllers.GetUsersWithProducts)
 	}
 
-	r.Run(PORT)
+	r.Run(fmt.Sprintf(":%s", port))
 }

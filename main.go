@@ -4,16 +4,24 @@ import (
 	"belajar-gin-gorm/controllers"
 	"belajar-gin-gorm/database"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 const PORT = ":3000"
 
 func main() {
 	fmt.Println("Starting server.......")
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+		return
+	}
 
 	dbPort, _ := strconv.Atoi(os.Getenv("DB_USER"))
 	dbConf := database.Database{
